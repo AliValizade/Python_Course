@@ -1,7 +1,7 @@
 import math
 
 while True:
-    oprator = input("Plz enter an Oprator such as (+,-,*,/,sin,cos,tan,cot,log,exit): ")
+    oprator = input("Plz enter an Oprator such as (+,-,*,/,sin,cos,tan,cot,Radical,factorial,exit): ")
 
     if oprator == "exit":
         break
@@ -23,14 +23,16 @@ while True:
         else:
             result = "Can not division by Zero!!"
     elif oprator == "sin":
-        result = math.sin(a)
+        result = math.sin(a * 180 / math.pi)
     elif oprator == "cos":
-        result = math.cos(a)
+        result = math.cos(a * 180 / math.pi)
     elif oprator == "tan":
-        result = math.tan(a)
+        result = math.tan(a * 180 / math.pi)
     elif oprator == "cot":
-        result = math.tanh(a)
-    elif oprator == "log":
-        result = math.log(a)
+        result = math.tanh(a * 180 / math.pi)
+    elif oprator == "Radical":
+        result = math.sqrt(a)
+    elif oprator == "factorial":
+        result = math.factorial(a)
 
     print ("result = ", result)
