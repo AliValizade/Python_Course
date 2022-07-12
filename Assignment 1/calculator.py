@@ -29,7 +29,7 @@ while True:
     elif oprator == "tan":
         result = math.tan(a * 180 / math.pi)
     elif oprator == "cot":
-        result = math.tanh(a * 180 / math.pi)
+        result = 1 / math.tan(a * 180 / math.pi)
     elif oprator == "Radical":
         result = math.sqrt(a)
     elif oprator == "factorial":
