@@ -1,5 +1,8 @@
 from turtle import Turtle
 t=Turtle()
+t.color('green')
+t.turtlesize(2)
+t.pensize(2)
 x = 60
 y = -80
 t.penup()
