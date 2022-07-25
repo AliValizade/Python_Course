@@ -37,9 +37,13 @@ def check_game():
             if G_Board[i][j] == 'X':
                 count_x += 1
                 count_dash -= 1
+            elif G_Board[j][i] == 'X':
+                count_x += 1
             elif G_Board[i][j] == 'O':
                 count_o += 1
-                count_dash -= 1             
+                count_dash -= 1
+            elif G_Board[j][i] == 'O':
+                count_o += 1            
         print_winner()
     print_winner()
     count_x = 0 #----------------- Check winner for sort diagonal 
