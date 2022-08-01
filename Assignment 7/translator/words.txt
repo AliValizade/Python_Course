@@ -1,0 +1,11 @@
+red,ghermez
+blue,abi
+green,sabz
+pink,sourati
+book,ketab
+this is my book,in ketabe man ast
+python course,dore payton
+horse,asb
+ship,kashti
+python is one of the programming languages. it is the best.,payton yeki az zabanhaye barname nevisi ast. oon behtarine.
+keyboard,safhe klid
