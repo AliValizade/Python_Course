@@ -125,13 +125,13 @@ class Main:
         update_myfile = open('database.txt', 'w')
         for media in self.media_list:
             if media.ID[0] == 'f':
-                update_myfile.write(media.ID + ',' + media.name + ',' + media.director + ',' + media.IMDB_Score + ',' + media.url + ',' + media.duration + ',' + media.casts)
+                update_myfile.write(media.ID + ',' + media.name + ',' + media.director + ',' + media.IMDB_Score + ',' + media.url + ',' + str(media.duration) + ',' + media.casts)
             elif media.ID[0] == 's':
-                update_myfile.write(media.ID + ',' + media.name + ',' + media.director + ',' + media.IMDB_Score + ',' + media.url + ',' + media.duration + ',' + media.casts + ',' + media.part)
+                update_myfile.write(media.ID + ',' + media.name + ',' + media.director + ',' + media.IMDB_Score + ',' + media.url + ',' + str(media.duration) + ',' + media.casts + ',' + media.part)
             elif media.ID[0] == 'c':
-                update_myfile.write(media.ID + ',' + media.name + ',' + media.director + ',' + media.IMDB_Score + ',' + media.url + ',' + media.duration + ',' + media.casts)
+                update_myfile.write(media.ID + ',' + media.name + ',' + media.director + ',' + media.IMDB_Score + ',' + media.url + ',' + str(media.duration) + ',' + media.casts)
             elif media.ID[0] == 'd':
-                update_myfile.write(media.ID + ',' + media.name + ',' + media.director + ',' + media.IMDB_Score + ',' + media.url + ',' + media.duration + ',' + media.casts)
+                update_myfile.write(media.ID + ',' + media.name + ',' + media.director + ',' + media.IMDB_Score + ',' + media.url + ',' + str(media.duration) + ',' + media.casts)
             if media != self.media_list[-1]:
                 update_myfile.write('\n')
         update_myfile.close()
