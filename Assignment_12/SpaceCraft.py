@@ -1,5 +1,4 @@
 import math, random, time
-from os import remove
 import arcade
 
 class Enamy(arcade.Sprite):
@@ -7,7 +6,7 @@ class Enamy(arcade.Sprite):
         super().__init__(":resources:images/space_shooter/playerShip3_orange.png")
         self.width = 48
         self.height = 48
-        self.speed = 4
+        self.speed = 3
         self.angle = 180
         self.center_x = random.randint(0, w)
         self.center_y = h
@@ -19,7 +18,7 @@ class Bullet(arcade.Sprite):
     def __init__(self, host):
         super().__init__(":resources:images/space_shooter/laserRed01.png")
         self.angle = host.angle
-        self.speed = 5
+        self.speed = 10
         self.center_x = host.center_x
         self.center_y = host.center_y
         
@@ -56,6 +55,13 @@ class Life(arcade.Sprite):
         self.height = 48
         self.center_x = x
         self.center_y = y
+class Explosion(arcade.Sprite):
+    def __init__(self, x, y):
+        super().__init__('./explosion.png')
+        self.width = 200
+        self.height = 200
+        self.center_x = x
+        self.center_y = y
 
 class Game(arcade.Window):
     def __init__(self):
@@ -66,14 +72,12 @@ class Game(arcade.Window):
         self.bg_image = arcade.load_texture(":resources:images/backgrounds/stars.png")
         self.my_airplane = SpaceCraft(self.w, self.h)
         self.enemy_list = []
+        self.explosion_list = []
         self.start_time = time.time()
         self.life = Life(30, 30)
-        # self.life_list = []
-        # x = 0
-        # for i in range(self.my_airplane.health):
-        #     self.life_list.append(Life(30 + x, 30))  
-        #     x += 30
-
+        self.bullet_sound = arcade.load_sound(':resources:sounds/laser3.wav')
+        self.enemy_explosion = arcade.load_sound(':resources:sounds/explosion1.wav')
+        
     def on_draw(self):
         arcade.start_render()
         arcade.draw_lrwh_rectangle_textured(0, 0, self.w, self.h, self.bg_image)
@@ -84,17 +88,24 @@ class Game(arcade.Window):
             self.my_airplane.bullet_list[i].draw()
         for i in range(len(self.enemy_list)):
             self.enemy_list[i].draw()
+        for i in range(len(self.my_airplane.bullet_list)):
+            for j in range(len(self.enemy_list)):
+                if arcade.check_for_collision(self.my_airplane.bullet_list[i], self.enemy_list[j]):
+                    self.explosion_list[j].draw()
         for i in range(self.my_airplane.health):
             arcade.draw_lrwh_rectangle_textured(20 + i*30, 20, 30, 30, self.life.img_life)
         if self.my_airplane.health == 0:
             arcade.draw_text('GameOver!', 330, 300, arcade.color.RED, 30)
-            arcade.pause(1)
+            arcade.pause(2)
             arcade.draw_text('Press "Q" to Quit!', 310, 200, arcade.color.RED, 24)
     def on_update(self, delta_time: float):
         self.end_time = time.time()
-        if self.end_time - self.start_time > 4:
+        rand_time = random.randint(2, 7)
+        if self.end_time - self.start_time > rand_time:
             self.enemy_list.append(Enamy(self.w, self.h))
             self.start_time = time.time()
+        for enemy in self.enemy_list:
+            self.explosion_list.append(Explosion(enemy.center_x, enemy.center_y))
         self.my_airplane.rotate()
         for i in range(len(self.my_airplane.bullet_list)):
             self.my_airplane.bullet_list[i].move()
@@ -103,6 +114,7 @@ class Game(arcade.Window):
         for bullet in self.my_airplane.bullet_list:
             for enemy in self.enemy_list:
                 if arcade.check_for_collision(bullet, enemy):
+                    arcade.play_sound(self.enemy_explosion)
                     self.enemy_list.remove(enemy)
                     self.my_airplane.bullet_list.remove(bullet)
                     self.my_airplane.score += 1
@@ -121,6 +133,7 @@ class Game(arcade.Window):
             self.my_airplane.change_angle = 1
         elif key == arcade.key.SPACE:
             self.my_airplane.fire()
+            arcade.play_sound(self.bullet_sound)
         elif key == arcade.key.Q:
             arcade.exit()
     def on_key_release(self, symbol: int, modifiers: int):
