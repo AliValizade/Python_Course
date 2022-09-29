@@ -9,7 +9,7 @@ class Player(arcade.AnimatedWalkingSprite):
         self.center_y = 300
         self.speed = 4
         self.pocket = []
-        self.health = 5
+        self.health = 4
         self.stand_right_textures = [arcade.load_texture(':resources:images/animated_characters/male_adventurer/maleAdventurer_idle.png')]
         self.stand_left_textures = [arcade.load_texture(':resources:images/animated_characters/male_adventurer/maleAdventurer_idle.png', mirrored=True)]
         self.walk_right_textures = [arcade.load_texture(':resources:images/animated_characters/male_adventurer/maleAdventurer_walk0.png'),
