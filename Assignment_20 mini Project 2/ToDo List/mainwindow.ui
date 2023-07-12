@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>To Do List</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -21,10 +21,20 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QLineEdit" name="tb_title"/>
+       <widget class="QLineEdit" name="tb_title">
+        <property name="inputMask">
+         <string/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QLineEdit" name="tb_description"/>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="tb_time"/>
       </item>
       <item>
        <widget class="QPushButton" name="btn_add">

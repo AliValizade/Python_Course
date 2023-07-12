@@ -3,10 +3,8 @@ import sqlite3
 connection = sqlite3.connect("todolistDB.db")
 my_cursor = connection.cursor()
 
-def addTask(title, description):
-    my_cursor.execute(f'INSERT INTO Tasks(title, description) VALUES("{title}","{description}")')
-    # my_cursor.execute('UPDATE Tasks SET time="14:30" WHERE title="Lunch"')
-    # my_cursor.execute('DELETE FROM Tasks WHERE title="Wake up"')
+def addTask(id, title, description, time):
+    my_cursor.execute(f'INSERT INTO Tasks(id, title, description, time, done) VALUES("{id}","{title}","{description}","{time}","{0}")')
     connection.commit()
 
 def getAll():
@@ -14,11 +12,15 @@ def getAll():
     results = my_cursor.fetchall()
     return results 
 
-def deleteTask(args):
-    pass
-
-def updateDatabase(args):
-    pass
-
 def getDetails(id):
-    pass
+    my_cursor.execute(f'SELECT * FROM Tasks WHERE id={id}')
+    result = my_cursor.fetchall()
+    return result
+
+def deleteTask(del_id):
+    my_cursor.execute(f'DELETE FROM Tasks WHERE id={del_id}')
+    connection.commit()
+
+def update_done(id, state):
+    my_cursor.execute(f'UPDATE Tasks SET done = {state} WHERE id={id}')
+    connection.commit()

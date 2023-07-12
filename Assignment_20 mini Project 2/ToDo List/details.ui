@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Detail</string>
+   <string>Details Of Task</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -190,9 +190,6 @@
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
-      </item>
-      <item row="7" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout"/>
       </item>
       <item row="7" column="1">
        <widget class="QPushButton" name="back_btn">
